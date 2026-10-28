@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Constitutional Crisis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+/* ===== Theme: parchment, navy, brass ===== */
+:root{
+  --navy:#17243f; --navy2:#22345a; --brass:#b08d3c; --brass2:#d8b867;
+  --paper:#fbf6ea; --paper2:#f4ecd8; --edge:#d9caa6; --ink:#2a2420; --muted:#6b6050;
+  --red:#9b2c22; --amber:#b0701a; --green:#2f6b3f; --purple:#5b4a8c;
+  --display:'Playfair Display', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --serif:'Source Serif 4', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --sans:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --black:'UnifrakturMaguntia', 'Old English Text MT', var(--display);
+  --shadow:0 1px 2px rgba(40,30,10,.08), 0 8px 24px rgba(40,30,10,.10);
+}
+*{box-sizing:border-box}
+html{background:#ece2c9}
+body{margin:0;min-height:100vh;color:var(--ink);font:17px/1.6 var(--serif);
+  background:#ece2c9 url(images/parchment.jpg) center top / cover fixed;}
+button{font:inherit;color:inherit;cursor:pointer}
+input{font:16px var(--sans);color:var(--ink);background:#fffdf7;border:1.5px solid var(--edge);border-radius:10px;padding:11px 13px;width:100%;max-width:360px}
+input:focus{outline:3px solid color-mix(in srgb,var(--brass) 45%,transparent);border-color:var(--brass)}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 64px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0 0 8px;color:var(--navy)}
+p{margin:0 0 12px}
+.muted{color:var(--muted)} .small{font-size:14.5px}
+.sans{font-family:var(--sans)}
+.eyebrow{font:700 12.5px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+.btn{font:600 15px var(--sans);border:1.5px solid var(--edge);background:#fffdf7;padding:11px 18px;border-radius:999px;transition:transform .12s, border-color .12s}
+.btn:hover{border-color:var(--brass);transform:translateY(-1px)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:inset 0 0 0 2px var(--navy), inset 0 0 0 3.5px var(--brass)}
+.btn.primary:hover{background:var(--navy2)}
+.btn.ghost{background:transparent;border-color:transparent}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.paper{background:var(--paper);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--shadow)}
+.pad{padding:22px}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+
+/* ===== Home ===== */
+.hero{position:relative;margin:0 -16px 22px;padding:44px 32px 40px;background:radial-gradient(120% 140% at 0% 0%, #2a3e66 0%, var(--navy) 55%, #0f1830 100%);color:#fff;overflow:hidden;border-bottom:4px solid var(--brass)}
+@media(min-width:952px){.hero{margin:0 0 22px;border-radius:0 0 22px 22px}}
+.hero .eyebrow{color:var(--brass2)}
+.hero h1{color:#fff;font-size:clamp(40px,7vw,64px);font-weight:900;letter-spacing:-.01em;margin:10px 0 12px;max-width:520px;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.hero p{max-width:470px;color:#e6dcc4;font-size:18px}
+.hero .stars{color:var(--brass2);letter-spacing:.4em;font-size:14px}
+.collage{position:absolute;right:-10px;top:26px;width:440px;height:300px;pointer-events:none}
+.collage img{position:absolute;width:250px;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.collage img:nth-child(1){left:0;top:30px;transform:rotate(-7deg)}
+.collage img:nth-child(2){left:150px;top:0;transform:rotate(5deg)}
+.collage img:nth-child(3){left:40px;top:140px;transform:rotate(3deg)}
+.collage img:nth-child(4){left:180px;top:135px;transform:rotate(-4deg)}
+@media(max-width:860px){.collage{display:none}}
+.namebox{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.tally{font:600 14.5px var(--sans);color:var(--muted)}
+.tally b{color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:18px}
+@media(max-width:680px){.cards{grid-template-columns:1fr}}
+.ccard{display:flex;flex-direction:column;text-align:left;padding:0;overflow:hidden;background:var(--paper);border:1px solid var(--edge);border-radius:16px;box-shadow:var(--shadow);transition:transform .15s, box-shadow .15s}
+.ccard:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(40,30,10,.08),0 16px 34px rgba(40,30,10,.18)}
+.ccard .art{aspect-ratio:16/8;overflow:hidden;position:relative;background:var(--navy)}
+.ccard .art img{width:100%;height:100%;object-fit:cover;transform:scale(1.07);transition:transform .4s}
+.ccard:hover .art img{transform:scale(1.12)}
+.ccard .num{position:absolute;left:14px;top:12px;font:700 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(15,24,48,.75);padding:5px 10px;border-radius:99px;border:1px solid var(--brass)}
+.ccard .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.ccard h2{font-size:25px;margin:0}
+.ccard .role{font:600 15px var(--sans);color:var(--red)}
+.ccard .arts{font:13.5px var(--sans);color:var(--muted)}
+.seals{display:flex;gap:7px;align-items:center;margin-top:6px}
+.seal{width:24px;height:24px;border-radius:50%;border:2px dashed var(--edge);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.seal.on{border:2px solid var(--brass);background:radial-gradient(circle at 35% 30%, var(--brass2), var(--brass) 70%)}
+.how{margin-top:20px}
+.how ul{margin:0;padding-left:20px}
+.how li{margin-bottom:6px}
+
+/* ===== Play: top bar ===== */
+.topbar{position:sticky;top:0;z-index:20;margin:0 -16px 18px;padding:10px 16px;background:linear-gradient(var(--navy),#121d36);color:#fff;border-bottom:3px solid var(--brass);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+@media(min-width:952px){.topbar{margin:0 0 18px;border-radius:0 0 16px 16px}}
+.topbar .t{font:900 20px var(--display);color:#fff}
+.topbar .r{font:600 13px var(--sans);color:var(--brass2);letter-spacing:.06em;text-transform:uppercase}
+.topbar .quit{color:#cdbf9d;font:600 13px var(--sans);background:none;border:0;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.gauges{display:flex;gap:18px;align-items:center}
+.gauge{display:flex;align-items:center;gap:8px}
+.gauge svg{width:84px;height:50px;overflow:visible}
+.gauge .gv{font:900 22px var(--display);line-height:1}
+.gauge .gl{font:600 11.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:#cdbf9d;line-height:1.2;max-width:96px}
+.needle{transform-box:view-box;transform-origin:60px 62px;transition:transform 1s cubic-bezier(.3,1.5,.5,1)}
+.delta{font:700 12px var(--sans);padding:1px 6px;border-radius:99px;margin-left:4px;vertical-align:2px}
+.delta.up{background:#2f6b3f;color:#fff} .delta.down{background:#9b2c22;color:#fff} .delta.zero{background:#3a4867;color:#cdbf9d}
+@media(max-width:560px){.gauge svg{width:64px;height:38px}.gauge .gl{font-size:10.5px;max-width:70px}.gauge .gv{font-size:18px}.topbar .t{font-size:17px}}
+
+/* ===== Play: scene ===== */
+.banner{position:relative;border-radius:16px 16px 0 0;overflow:hidden;aspect-ratio:16/6;background:var(--navy)}
+.banner img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:kenburns 18s ease-out both}
+@keyframes kenburns{from{transform:scale(1.08)}to{transform:scale(1.16) translateY(-1.5%)}}
+.banner .cap{position:absolute;left:0;right:0;bottom:0;padding:44px 24px 16px;background:linear-gradient(transparent, rgba(12,18,36,.88))}
+.banner .step{font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--brass2)}
+.banner h2{color:#fff;font-size:clamp(24px,4vw,34px);font-weight:900;margin:4px 0 0;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.scene{border-radius:0 0 16px 16px;border-top:0}
+.intro{font-style:italic;border-left:4px solid var(--brass);padding:4px 0 4px 14px;margin-bottom:16px;color:#4b4236}
+.story{font-size:18.5px;line-height:1.65}
+.story b{font-weight:inherit}
+.q{font:900 21px var(--display);color:var(--navy);margin:20px 0 12px}
+.opts{display:flex;flex-direction:column;gap:11px}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;padding:14px 16px;border-radius:12px;border:1.5px solid var(--edge);background:#fffdf7;font-size:17.5px;line-height:1.45;transition:transform .12s,border-color .12s,box-shadow .12s}
+.opt:hover:not(:disabled){border-color:var(--brass);transform:translateX(3px);box-shadow:0 4px 14px rgba(40,30,10,.10)}
+.opt .k{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font:900 16px var(--display);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px var(--navy), inset 0 0 0 3.5px var(--brass)}
+.opt:disabled{cursor:default}
+.opt.picked{border-color:var(--navy);border-width:2px;background:#fff}
+.opt.faded{opacity:.42}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.scrollbtn{display:inline-flex;align-items:center;gap:8px}
+.scrollbtn svg{width:20px;height:20px}
+
+/* ===== Newspaper clipping ===== */
+.clip{position:relative;margin-top:20px;background:#f7f0dd;border:1px solid #d5c59d;border-radius:4px;padding:16px 20px 18px;box-shadow:0 1px 0 #fff inset, 0 10px 26px rgba(40,30,10,.16);transform:rotate(-.4deg);animation:drop .45s ease-out both}
+@keyframes drop{from{opacity:0;transform:translateY(16px) rotate(-1.5deg)}to{opacity:1;transform:rotate(-.4deg)}}
+.mast{text-align:center;border-bottom:3px double var(--ink);padding-bottom:4px}
+.mast .name{font:400 30px/1 var(--black);color:var(--ink)}
+.mast .line{display:flex;justify-content:space-between;font:600 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#5c5243;border-top:1px solid var(--ink);margin-top:6px;padding-top:3px}
+.headline{font:900 clamp(22px,3.6vw,30px)/1.12 var(--display);color:var(--ink);margin:12px 0 10px}
+#fb{scroll-margin-top:120px}
+.clip .body{clear:both}
+.clip .body{font-size:16.5px;line-height:1.6;columns:2 280px;column-gap:26px;column-rule:1px solid #d5c59d}
+.clip .body p:first-child::first-letter{float:left;font:900 44px/.8 var(--display);padding:5px 4px 0 0;margin-right:2px;color:var(--navy)}
+.clip .dl{font:600 13px var(--sans);color:#5c5243;margin-top:10px;padding-top:8px;border-top:1px solid #d5c59d;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.stamp{float:right;position:relative;margin:14px 4px 6px 18px;padding:6px 14px;border:4px double currentColor;border-radius:8px;font:900 19px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;transform:rotate(-9deg);opacity:.86;mix-blend-mode:multiply;animation:stamp .4s .15s cubic-bezier(.2,1.7,.4,1) both;background:radial-gradient(circle at 30% 40%, transparent 60%, rgba(255,255,255,.35) 61%) }
+@keyframes stamp{from{opacity:0;transform:scale(2.4) rotate(-20deg)}to{opacity:.86;transform:scale(1) rotate(-9deg)}}
+.s-good{color:var(--green)} .s-bad{color:var(--red)} .s-risky{color:var(--amber)} .s-partial{color:var(--purple)}
+@media(max-width:600px){.stamp{font-size:14px;padding:5px 9px;margin:12px 0 6px 10px}}
+@media(max-width:560px){.gauge .long{display:none}}
+.next{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.link{font:700 14px var(--sans);color:var(--navy);background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--brass)}
+
+/* ===== Pocket Constitution ===== */
+.ov{position:fixed;inset:0;background:rgba(10,14,28,.62);display:flex;align-items:center;justify-content:center;padding:16px;z-index:40;animation:fade .2s both}
+@keyframes fade{from{opacity:0}}
+.scroll{position:relative;width:100%;max-width:680px;max-height:88vh;overflow:auto;padding:30px 34px;border-radius:6px;background:#f1e6c8 url(images/parchment.jpg) center/cover;box-shadow:0 30px 60px rgba(0,0,0,.45);border:1px solid #c9b27a}
+.scroll::before,.scroll::after{content:'';position:sticky;display:block;left:0;right:0;height:0}
+.scroll h2{text-align:center;font-size:28px;margin:4px 0 2px}
+.scroll .sub{text-align:center;font:italic 15px var(--serif);color:#5c5243;margin-bottom:14px}
+.scroll .x{position:absolute;right:14px;top:12px}
+.clause{margin:16px 0;padding:0 0 14px;border-bottom:1px solid rgba(90,70,30,.25)}
+.clause:last-child{border-bottom:0}
+.clause .c{font:700 13px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#7a5b16}
+.clause blockquote{margin:6px 0 0;font:18px/1.6 var(--serif);color:#2a2116}
+.clause blockquote::first-letter{font:900 34px/1 var(--display);color:var(--navy)}
+
+/* ===== Ending: front page ===== */
+.front{background:#f7f0dd;border:1px solid #d5c59d;box-shadow:var(--shadow);padding:22px 26px 26px;margin-top:22px;border-radius:4px}
+.front .mast .name{font-size:clamp(38px,7vw,62px)}
+.front .mast .line{font-size:11.5px}
+.bighead{font:900 clamp(34px,6.5vw,58px)/1.02 var(--display);text-align:center;margin:16px 0 6px;color:var(--ink)}
+.deck{text-align:center;font:italic 19px/1.5 var(--serif);max-width:640px;margin:0 auto 16px;color:#3e352a}
+.photo{border:1px solid #bfae86;padding:6px;background:#fff9ea}
+.photo .img{aspect-ratio:16/9;overflow:hidden;background:var(--navy)}
+.photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.photo .capt{font:italic 13.5px var(--serif);color:#5c5243;padding:6px 2px 0}
+.fb-best img.fallback{filter:saturate(1.1) brightness(1.05)}
+.fb-principled img.fallback{filter:grayscale(.45) brightness(.92)}
+.fb-mixed img.fallback{filter:sepia(.35) saturate(.8)}
+.fb-bad img.fallback{filter:grayscale(.85) contrast(1.15) brightness(.8)}
+.cols{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;margin-top:18px}
+@media(max-width:720px){.cols{grid-template-columns:1fr}}
+.colhead{font:900 15px var(--sans);letter-spacing:.12em;text-transform:uppercase;border-bottom:2px solid var(--ink);padding-bottom:4px;margin-bottom:8px}
+.rec{display:flex;gap:10px;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px dotted #bfae86;font-size:15.5px}
+.rec .ti{font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:#5c5243}
+.mini{flex:none;font:900 11px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;border:2.5px double currentColor;border-radius:5px;padding:4px 6px;transform:rotate(-6deg);white-space:nowrap}
+.standing{display:flex;flex-direction:column;gap:12px;background:var(--navy);color:#fff;border-radius:10px;padding:14px}
+.coupon{border:2.5px dashed #8f7a4b;border-radius:8px;padding:14px;margin-top:14px;background:#fffaf0;position:relative}
+.coupon::before{content:'✂';position:absolute;top:-14px;left:12px;background:#f7f0dd;padding:0 4px;font-size:18px;color:#8f7a4b}
+.coupon .code{font:700 22px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.14em;color:var(--navy)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+@media(max-width:640px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gal{border:2px dashed var(--edge);border-radius:12px;padding:12px;min-height:78px;font:600 14px var(--sans);color:var(--muted);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:4px}
+.gal.on{border:2px solid var(--brass);background:linear-gradient(#fffaf0,#f6ead0);color:var(--navy)}
+.gal .medal{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%, var(--brass2), var(--brass) 70%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
+@media print{ .noprint{display:none!important} body{background:#fff} .front{box-shadow:none;border:0} }
+@media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+<div id="app" class="wrap"></div>
+<div id="layer"></div>
+<script>
+"use strict";
+/* =====================================================================
+   CONSTITUTIONAL CRISIS
+   A solo choose-your-path game about the Articles of the Constitution.
+   Each crisis puts the student in a different role. Key facts (days,
+   vote counts, evidence) are randomized every play, so the right answer
+   changes and students have to read carefully each time.
+
+   IMAGES (folder "images/" next to this file). Any missing image is
+   skipped gracefully:
+     parchment.jpg, president.jpg, senator.jpg, justice.jpg, governor.jpg
+     ending-best.jpg, ending-principled.jpg, ending-mixed.jpg, ending-bad.jpg
+     optional scene art: override, shutdown, treaty, treason, river,
+     fugitive, shrimp, unrest (.jpg)
+   ===================================================================== */
+
+// ---------- POCKET CONSTITUTION (actual text, lightly trimmed with "…") ----------
+const CL = {
+  'I-3-4': ['Art. I, §3, cl.4','The Vice President of the United States shall be President of the Senate, but shall have no Vote, unless they be equally divided.'],
+  'I-3-6': ['Art. I, §3, cl.6','The Senate shall have the sole Power to try all Impeachments. When sitting for that Purpose, they shall be on Oath or Affirmation. When the President of the United States is tried, the Chief Justice shall preside: And no Person shall be convicted without the Concurrence of two thirds of the Members present.'],
+  'I-5-2': ['Art. I, §5, cl.2','Each House may determine the Rules of its Proceedings, punish its Members for disorderly Behaviour, and, with the Concurrence of two thirds, expel a Member.'],
+  'I-7-2': ['Art. I, §7, cl.2','Every Bill which shall have passed the House of Representatives and the Senate, shall, before it become a Law, be presented to the President of the United States; If he approve he shall sign it, but if not he shall return it, with his Objections to that House in which it shall have originated … If after such Reconsideration two thirds of that House shall agree to pass the Bill, it shall be sent … to the other House, by which it shall likewise be reconsidered, and if approved by two thirds of that House, it shall become a Law. … If any Bill shall not be returned by the President within ten Days (Sundays excepted) after it shall have been presented to him, the Same shall be a Law, in like Manner as if he had signed it, unless the Congress by their Adjournment prevent its Return, in which Case it shall not be a Law.'],
+  'I-8-3': ['Art. I, §8, cl.3','[The Congress shall have Power] To regulate Commerce with foreign Nations, and among the several States, and with the Indian Tribes;'],
+  'I-9-7': ['Art. I, §9, cl.7','No Money shall be drawn from the Treasury, but in Consequence of Appropriations made by Law; and a regular Statement and Account of the Receipts and Expenditures of all public Money shall be published from time to time.'],
+  'I-10-1': ['Art. I, §10, cl.1','No State shall enter into any Treaty, Alliance, or Confederation; grant Letters of Marque and Reprisal; coin Money; emit Bills of Credit; make any Thing but gold and silver Coin a Tender in Payment of Debts; pass any Bill of Attainder, ex post facto Law, or Law impairing the Obligation of Contracts, or grant any Title of Nobility.'],
+  'I-10-2': ['Art. I, §10, cl.2','No State shall, without the Consent of the Congress, lay any Imposts or Duties on Imports or Exports, except what may be absolutely necessary for executing it’s inspection Laws …'],
+  'I-10-3': ['Art. I, §10, cl.3','No State shall, without the Consent of Congress, lay any Duty of Tonnage, keep Troops, or Ships of War in time of Peace, enter into any Agreement or Compact with another State, or with a foreign Power, or engage in War, unless actually invaded, or in such imminent Danger as will not admit of delay.'],
+  'II-2-1': ['Art. II, §2, cl.1','The President shall be Commander in Chief of the Army and Navy of the United States, and of the Militia of the several States, when called into the actual Service of the United States; … and he shall have Power to grant Reprieves and Pardons for Offences against the United States, except in Cases of Impeachment.'],
+  'II-2-2': ['Art. II, §2, cl.2','He shall have Power, by and with the Advice and Consent of the Senate, to make Treaties, provided two thirds of the Senators present concur; and he shall nominate, and by and with the Advice and Consent of the Senate, shall appoint Ambassadors, other public Ministers and Consuls, Judges of the supreme Court, and all other Officers of the United States …'],
+  'II-2-3': ['Art. II, §2, cl.3','The President shall have Power to fill up all Vacancies that may happen during the Recess of the Senate, by granting Commissions which shall expire at the End of their next Session.'],
+  'II-3': ['Art. II, §3','He shall from time to time give to the Congress Information of the State of the Union, and recommend to their Consideration such Measures as he shall judge necessary and expedient; he may, on extraordinary Occasions, convene both Houses, or either of them, and in Case of Disagreement between them, with Respect to the Time of Adjournment, he may adjourn them to such Time as he shall think proper; … he shall take Care that the Laws be faithfully executed …'],
+  'III-1': ['Art. III, §1','The judicial Power of the United States, shall be vested in one supreme Court, and in such inferior Courts as the Congress may from time to time ordain and establish. The Judges, both of the supreme and inferior Courts, shall hold their Offices during good Behaviour, and shall, at stated Times, receive for their Services, a Compensation, which shall not be diminished during their Continuance in Office.'],
+  'III-2-1': ['Art. III, §2, cl.1','The judicial Power shall extend to all Cases, in Law and Equity, arising under this Constitution, the Laws of the United States, and Treaties made, or which shall be made, under their Authority; … to Controversies between two or more States; …'],
+  'III-2-2': ['Art. III, §2, cl.2','In all Cases affecting Ambassadors, other public Ministers and Consuls, and those in which a State shall be Party, the supreme Court shall have original Jurisdiction. In all the other Cases before mentioned, the supreme Court shall have appellate Jurisdiction, both as to Law and Fact, with such Exceptions, and under such Regulations as the Congress shall make.'],
+  'III-3-1': ['Art. III, §3, cl.1','Treason against the United States, shall consist only in levying War against them, or in adhering to their Enemies, giving them Aid and Comfort. No Person shall be convicted of Treason unless on the Testimony of two Witnesses to the same overt Act, or on Confession in open Court.'],
+  'IV-1': ['Art. IV, §1','Full Faith and Credit shall be given in each State to the public Acts, Records, and judicial Proceedings of every other State. And the Congress may by general Laws prescribe the Manner in which such Acts, Records and Proceedings shall be proved, and the Effect thereof.'],
+  'IV-2-1': ['Art. IV, §2, cl.1','The Citizens of each State shall be entitled to all Privileges and Immunities of Citizens in the several States.'],
+  'IV-2-2': ['Art. IV, §2, cl.2','A Person charged in any State with Treason, Felony, or other Crime, who shall flee from Justice, and be found in another State, shall on Demand of the executive Authority of the State from which he fled, be delivered up, to be removed to the State having Jurisdiction of the Crime.'],
+  'IV-4': ['Art. IV, §4','The United States shall guarantee to every State in this Union a Republican Form of Government, and shall protect each of them against Invasion; and on Application of the Legislature, or of the Executive (when the Legislature cannot be convened) against domestic Violence.'],
+  'V': ['Art. V','The Congress, whenever two thirds of both Houses shall deem it necessary, shall propose Amendments to this Constitution, or, on the Application of the Legislatures of two thirds of the several States, shall call a Convention for proposing Amendments, which, in either Case, shall be valid to all Intents and Purposes, as Part of this Constitution, when ratified by the Legislatures of three fourths of the several States, or by Conventions in three fourths thereof …'],
+  'VI-2': ['Art. VI, cl.2','This Constitution, and the Laws of the United States which shall be made in Pursuance thereof; and all Treaties made, or which shall be made, under the Authority of the United States, shall be the supreme Law of the Land; and the Judges in every State shall be bound thereby, any Thing in the Constitution or Laws of any State to the Contrary notwithstanding.'],
+  'VI-3': ['Art. VI, cl.3','The Senators and Representatives before mentioned, and the Members of the several State Legislatures, and all executive and judicial Officers, both of the United States and of the several States, shall be bound by Oath or Affirmation, to support this Constitution; but no religious Test shall ever be required as a Qualification to any Office or public Trust under the United States.'],
+};
+
+// ---------- helpers ----------
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const val = (x, s) => typeof x === 'function' ? x(s.v, s.f, s) : x;
+const twoThirds = (yes, present) => yes*3 >= present*2;
+const need = present => Math.ceil(present*2/3 - 1e-9);
+
+// ---------- CRISES ----------
+// Scene: {title, kind:'decision'|'knowledge', text(v,f), q, pocket:[clause ids], options:[...]}
+// Option: {t: label, verdict: 'good'|'risky'|'partial'|'bad' (or fn), ps: support change, set:{flags}, next: scene id|'end' (or fn), fb: feedback (or fn)}
+const CRISES = [
+/* ===================== 1. PRESIDENT ===================== */
+{
+  id:'president', title:'The Midnight Bill', role:'President of the United States',
+  arts:'Art. I §7 · Art. I §9 · Art. II §2–3 · Art. III · Art. V',
+  intro:'You are President. Congress has just passed the Smart Highway Act. It requires a speed-limiting chip in every new car and pays for road repairs with a 10-cent gas tax. The country is split almost evenly. You like the safety idea, but you think the gas tax will hurt working families.',
+  vars(){
+    const votes = pick([{h:301,s:68},{h:290,s:67},{h:289,s:70},{h:310,s:66},{h:276,s:64},{h:295,s:71}]);
+    return {days:pick([4,7,14]), h:votes.h, s:votes.s};
+  },
+  start:'desk',
+  scenes:{
+    desk:{title:'The Bill on Your Desk', kind:'decision', pocket:['I-7-2'],
+      text:v=>`The Smart Highway Act reached the White House this morning. Congress plans to adjourn for the year in <b>${v.days} days</b> (not counting Sundays). Your chief of staff walks you through the options.`,
+      q:'What do you do with the bill?',
+      options:[
+        {t:'Sign the bill into law.', verdict:'good', ps:-5, set:{law:true}, next:'enforce',
+         fb:'You sign it, and the Smart Highway Act is now law. Article I, §7: if the President approves a bill, “he shall sign it.” Drivers who hate the gas tax are not happy with you.'},
+        {t:'Veto the bill and send it back to Congress with your objections.', verdict:'good', ps:5, next:'override',
+         fb:'You return the bill “with his Objections to that House in which it shall have originated” (Art. I, §7). Congress can now try to override your veto, but it needs two-thirds of each house.'},
+        {t:'Neither sign nor veto it. Just wait until Congress leaves town.',
+         verdict:v=>v.days<10?'good':'risky', ps:v=>v.days<10?0:-5,
+         set:v=>v.days<10?{law:false,pocket:true}:{law:true},
+         next:v=>v.days<10?'budget':'enforce',
+         fb:v=>v.days<10
+          ? `Pocket veto! Congress adjourned ${v.days} days later, before the 10-day window closed, so “the Congress by their Adjournment prevent its Return, in which Case it shall not be a Law.” The bill dies, and Congress can’t override a pocket veto.`
+          : `Mistake. Congress was still in session when 10 days (Sundays excepted) passed. Under Article I, §7, an unsigned bill “shall be a Law, in like Manner as if he had signed it.” The Act became law without your signature, and you lost your chance to object.`},
+        {t:'Sign the bill, but cross out the gas-tax section first.', verdict:'bad', ps:10, set:{law:true,lineitem:true}, next:'enforce',
+         fb:'Voters love it for a week. Then the Supreme Court rules, as it did in Clinton v. City of New York (1998), that Article I, §7 gives the President only two choices: approve the whole bill or return the whole bill. There is no line-item veto. Your cross-out is void, and the full Act, gas tax included, is law.'},
+      ]},
+    override:{title:'The Override Vote', kind:'knowledge', pocket:['I-7-2','I-3-4'],
+      text:v=>`Congress votes to override your veto, and every member is present.<br><b>House:</b> ${v.h} yes, ${435-v.h} no.<br><b>Senate:</b> ${v.s} yes, ${100-v.s} no.<br>Reporters are waiting outside. You need to know the result before you speak.`,
+      q:'What happens to the Smart Highway Act?',
+      options:[
+        {t:'It becomes law. Both houses reached two-thirds.', verdict:v=>(twoThirds(v.h,435)&&twoThirds(v.s,100))?'good':'bad'},
+        {t:'Your veto stands. At least one house fell short of two-thirds.', verdict:v=>(twoThirds(v.h,435)&&twoThirds(v.s,100))?'bad':'good'},
+        {t:'It goes to the Supreme Court to break the disagreement.', verdict:'bad'},
+        {t:'The Vice President casts the deciding vote.', verdict:'bad'},
+      ].map(o=>Object.assign(o,{
+        ps:(v,f,s)=>0,
+        set:v=>({law:twoThirds(v.h,435)&&twoThirds(v.s,100)}),
+        next:v=>(twoThirds(v.h,435)&&twoThirds(v.s,100))?'enforce':'budget',
+        fb:v=>{const H=twoThirds(v.h,435), S=twoThirds(v.s,100);
+          return `Two-thirds of 435 is 290, and two-thirds of 100 is 66.7, so the Senate needs 67. House: ${v.h} ${H?'≥':'<'} 290. Senate: ${v.s} ${S?'≥':'<'} 67. `+
+          (H&&S?'The override succeeds, and the Act becomes law without your signature.':`The override fails in the ${!H&&!S?'House and the Senate':!H?'House':'Senate'}, so your veto stands.`)+
+          ' Courts and the Vice President play no part in an override.';}
+      }))},
+    enforce:{title:'A Company Refuses', kind:'decision', pocket:['II-3','II-2-1'],
+      text:(v,f)=>`${f.lineitem?'The full Act, gas tax included, is now in force. ':''}Voltan Motors, the country’s largest carmaker, announces that it will not install speed chips. Its CEO calls the law “government overreach.” Half the country cheers him on. Your Attorney General wants instructions.`,
+      q:'How do you respond?',
+      options:[
+        {t:'Direct the Justice Department to take Voltan to federal court.', verdict:'good', ps:0, next:'ruling',
+         fb:'Article II, §3: the President “shall take Care that the Laws be faithfully executed.” You enforce the law through the courts, even though it isn’t a law you loved. Voltan’s supporters are angry, but the process is working.'},
+        {t:'Announce that you disagree with the law and won’t enforce it.', verdict:'bad', ps:10, next:'ruling',
+         fb:'Many voters cheer. But the Take Care Clause makes enforcing the law a duty, not a choice. A President can’t cancel a law by ignoring it; that is Congress’s job. House members start talking about impeachment.'},
+        {t:'Order the Army to take over Voltan’s factories until they comply.', verdict:'bad', ps:-10, next:'ruling',
+         fb:'In Youngstown Sheet & Tube Co. v. Sawyer (1952), the Court stopped President Truman from seizing steel mills. Being Commander in Chief (Art. II, §2) does not let a President take over private businesses at home without Congress.'},
+        {t:'Ask Congress to amend the law to give carmakers two more years.', verdict:'good', ps:5, next:'ruling',
+         fb:'Article II, §3 lets you “recommend to their Consideration such Measures” as you think necessary. Congress debates your proposal. Until it acts, the law stays in force.'},
+      ]},
+    budget:{title:'Congress Strikes Back', kind:'decision', pocket:['I-7-2','I-9-7','II-3'],
+      text:(v,f)=>`The Smart Highway Act is dead for now. Congressional leaders fire back by copying the entire Act, word for word, into the annual budget bill. If you don’t sign a budget by Friday, the federal government shuts down.`,
+      q:'What do you do with the budget bill?',
+      options:[
+        {t:'Veto the whole budget, even if the government shuts down.', verdict:'good', ps:-10, next:'shutdown',
+         fb:'You may veto any bill, including a budget. It’s fully constitutional, but at midnight Friday national parks close and federal workers stop getting paid.'},
+        {t:'Sign the budget. Keeping the government open comes first.', verdict:'good', ps:5, set:{law:true}, next:'ruling',
+         fb:'You sign it. It’s legal, and most voters are relieved. Congress used the power of the purse to win the fight over the Act, and now it’s law.'},
+        {t:'Sign it, but issue a statement that you won’t enforce the highway section.', verdict:'risky', ps:5, set:{law:true}, next:'ruling',
+         fb:'Presidents have issued “signing statements” for nearly 200 years, but refusing to enforce part of a bill you signed runs into the Take Care Clause (Art. II, §3). Scholars call it a gray zone, and Congress calls it a power grab.'},
+        {t:'Veto it, then keep agencies running with emergency spending on your own.', verdict:'bad', ps:5, next:'shutdown',
+         fb:'Article I, §9: “No Money shall be drawn from the Treasury, but in Consequence of Appropriations made by Law.” Only Congress controls spending. The Treasury refuses your order, and the shutdown begins anyway.'},
+      ]},
+    shutdown:{title:'Day 9 of the Shutdown', kind:'decision', pocket:['I-9-7','II-3'],
+      text:'Federal workers are going without pay, and airports are backed up. Your approval rating is falling. Congressional leaders signal they could drop the highway section if you give them something in return.',
+      q:'What is your next move?',
+      options:[
+        {t:'Negotiate. Accept some of their spending priorities if they drop the Act.', verdict:'good', ps:10, next:'end',
+         fb:'You make a deal, and the government reopens. Bargaining between the branches is how separation of powers is supposed to work.'},
+        {t:'Hold firm and go on national TV to explain your reasons.', verdict:'good', ps:-5, next:'end',
+         fb:'Explaining your position to the public is entirely within your rights. The shutdown drags on, though, and patience is running out.'},
+        {t:'Order the Treasury to pay federal workers anyway.', verdict:'bad', ps:5, next:'end',
+         fb:'Without an appropriation passed by Congress (Art. I, §9), no money can leave the Treasury. Treasury lawyers refuse, and Congress points out that you just tried to spend money no one approved.'},
+        {t:'Use your power to adjourn Congress until it gives in.', verdict:'bad', ps:-5, next:'end',
+         fb:'Article II, §3 lets a President adjourn Congress only when the House and Senate disagree with each other about when to adjourn. No President has ever used it, and it doesn’t apply here.'},
+      ]},
+    ruling:{title:'The Supreme Court Rules', kind:'decision', pocket:['III-1','V','I-8-3'],
+      text:'Months later, the Supreme Court decides a lawsuit over the Act. It upholds the speed-chip rule under Congress’s power to regulate interstate commerce. But it strikes down the section ordering state police to inspect cars, ruling that Congress can’t command state officers to carry out a federal program. Supporters and critics both turn to you.',
+      q:'How do you respond to the ruling?',
+      options:[
+        {t:'Accept the ruling and propose a fix that uses federal inspectors instead.', verdict:'good', ps:5, next:'end',
+         fb:'Since Marbury v. Madison (1803), the courts have had the power to strike down laws that violate the Constitution. You work within the ruling, and Congress passes your fix.'},
+        {t:'Tell state police to keep inspecting anyway. The Court got it wrong.', verdict:'bad', ps:5, next:'end',
+         fb:'In Cooper v. Aaron (1958), the Court said its interpretations of the Constitution bind every official. Governors refuse your order, and Congress opens an investigation into your defiance of the Court.'},
+        {t:'Send a constitutional amendment straight to the states to overturn the ruling.', verdict:'bad', ps:0, next:'end',
+         fb:'Article V gives the President no formal role in amendments. Two-thirds of both houses of Congress, or a convention called by two-thirds of the states, must propose one. You can urge Congress, but you can’t send an amendment yourself.'},
+        {t:'Ask Congress to add two new seats to the Supreme Court.', verdict:'risky', ps:-10, next:'end',
+         fb:'This is legal: the Constitution doesn’t fix the Court’s size, and Congress has changed it by law several times. But when President Franklin Roosevelt tried this in 1937, even his own party turned on him. Critics say it threatens the courts’ independence.'},
+      ]},
+  },
+  endings:{
+    best:['Guardian of the Constitution','You used every power by the book and kept the country with you. Civics teachers will use your presidency as an example of the system working.'],
+    principled:['Right, but Alone','You stayed inside your constitutional limits, but it cost you. Your approval rating sank, and Congress stopped returning your calls.'],
+    mixed:['Popular, on Thin Ice','Voters still like you, but you bent the rules to get there. Law professors are writing articles about your presidency, and they aren’t friendly.'],
+    bad:['Constitutional Crisis','You overstepped your powers too many times. Courts reversed you, the House opened impeachment hearings, and trust in the presidency hit a record low.'],
+  }
+},
+/* ===================== 2. SENATOR ===================== */
+{
+  id:'senator', title:'Advice & Consent', role:'Senate Majority Leader',
+  arts:'Art. I §3 · Art. I §5 · Art. II §2 · Art. III',
+  intro:'You are Majority Leader of the U.S. Senate, so you decide what reaches the Senate floor. Over one busy term, the President sends you a Supreme Court nominee, a treaty and an ambassador, and the House sends over an impeachment. Each one tests the Senate’s powers.',
+  vars(){
+    const c = pick([{y:50,n:50},{y:51,n:49},{y:48,n:52}]);
+    const t = pick([{y:64,n:36},{y:67,n:33},{y:66,n:32},{y:65,n:33}]);
+    const j = pick([{y:68,n:32},{y:66,n:34},{y:65,n:32},{y:64,n:33}]);
+    return {cy:c.y, cn:c.n, ty:t.y, tn:t.n, jy:j.y, jn:j.n, days:pick([5,21])};
+  },
+  start:'vacancy',
+  scenes:{
+    vacancy:{title:'A Seat Opens', kind:'decision', pocket:['II-2-2','I-5-2'],
+      text:'A Supreme Court justice retires. Within a week the President nominates Judge Elena Park, a well-respected appeals court judge. Your party doesn’t love her views. Under current Senate rules, ending debate on a nomination takes 60 votes, and your party holds only 51 seats.',
+      q:'How do you handle the nomination?',
+      options:[
+        {t:'Schedule Judiciary Committee hearings, then a full Senate vote.', verdict:'good', ps:5, next:'confirm',
+         fb:'Article II, §2: the President appoints justices “by and with the Advice and Consent of the Senate.” Hearings and a vote are the Senate giving its advice and consent. Senators on both sides respect the process.'},
+        {t:'Refuse to hold any hearings until after next year’s election.', verdict:'risky', ps:-5, set:{stalled:true}, next:'confirm',
+         fb:'The Constitution sets no deadline, and Article I, §5 lets each house set its own rules. The Senate did something similar in 2016. It’s legal, but critics call it a failure to do the Senate’s constitutional job.'},
+        {t:'Change Senate rules so ending debate takes only a simple majority.', verdict:'risky', ps:0, next:'confirm',
+         fb:'Legal: Article I, §5 says “Each House may determine the Rules of its Proceedings.” The Senate made this exact change in 2013 and 2017. The minority warns that the change will come back to hurt your party when it’s out of power.'},
+        {t:'Tell the President to seat Judge Park now, since the Senate isn’t acting.', verdict:'bad', ps:-10, next:'confirm',
+         fb:'Without the Senate’s consent (or a real Senate recess), the President can’t put anyone on the Court. Article II, §2 requires the “Advice and Consent of the Senate.” Your own colleagues are stunned that you suggested giving away the Senate’s power.'},
+      ]},
+    confirm:{title:'The Confirmation Vote', kind:'knowledge', pocket:['II-2-2','I-3-4'],
+      text:(v,f)=>`${f.stalled?'After months of public pressure, you finally schedule the vote. ':''}The full Senate votes on Judge Park. All 100 senators vote.<br><b>Final tally:</b> ${v.cy} yes, ${v.cn} no.`,
+      q:'What happens to the nomination?',
+      options:[
+        {t:'She is confirmed by a simple majority and joins the Court.', verdict:v=>v.cy>v.cn?'good':'bad'},
+        {t:'The nomination fails, and the President must choose someone else.', verdict:v=>v.cy<v.cn?'good':'bad'},
+        {t:'The Vice President casts the deciding vote.', verdict:v=>v.cy===v.cn?'good':'bad'},
+        {t:'The House of Representatives votes to break the deadlock.', verdict:'bad'},
+      ].map(o=>Object.assign(o,{ps:0,next:'treaty',
+        fb:v=> v.cy===v.cn
+          ? 'Tie! Article I, §3: the Vice President “shall have no Vote, unless they be equally divided.” At 50–50 the Vice President breaks the tie. Vice Presidents have done this for cabinet nominees. The House has no role in confirmations.'
+          : v.cy>v.cn ? `${v.cy} of 100 is a majority, so Judge Park is confirmed. The Vice President votes only to break a tie, and the House has no role in confirmations.`
+          : `${v.cy} yes votes isn’t a majority, so the nomination fails. The Vice President votes only to break a tie, and the House has no role in confirmations.`}))},
+    treaty:{title:'The Valdora Fishing Treaty', kind:'knowledge', pocket:['II-2-2'],
+      text:v=>`The President signs a treaty with the nation of Valdora to share fishing waters, and the treaty comes to the Senate floor. <b>${v.ty+v.tn} senators are present.</b><br><b>The vote:</b> ${v.ty} yes, ${v.tn} no.`,
+      q:'Is the treaty approved?',
+      options:[
+        {t:'Yes. It reached two-thirds of the senators present.', verdict:v=>twoThirds(v.ty,v.ty+v.tn)?'good':'bad'},
+        {t:'No. It fell short of two-thirds of the senators present.', verdict:v=>twoThirds(v.ty,v.ty+v.tn)?'bad':'good'},
+        {t:'Yes. A simple majority of the Senate is enough.', verdict:'bad'},
+        {t:'Not yet. The House must also approve it.', verdict:'bad'},
+      ].map(o=>Object.assign(o,{ps:0,next:'recess',
+        fb:v=>{const p=v.ty+v.tn; return `Article II, §2: treaties need “two thirds of the Senators present.” With ${p} present, two-thirds is ${(p*2/3).toFixed(1)}, so the treaty needed ${need(p)} votes. It got ${v.ty}, so it is ${twoThirds(v.ty,p)?'approved':'rejected'}. Unlike an ordinary law, a treaty never goes to the House.`;}}))},
+    recess:{title:'The Recess Gambit', kind:'decision', pocket:['II-2-3','III-2-1','I-5-2'],
+      text:v=>`The President has nominated an ambassador to Valdora, but your committee hasn’t acted. The Senate is scheduled for a <b>${v.days}-day break</b>. The White House hints that the President will make a recess appointment while you’re gone.`,
+      q:'What’s your move?',
+      options:[
+        {t:'Hold short “pro forma” sessions every three days so the Senate never formally recesses.', verdict:'good', ps:0, next:'trial',
+         fb:'In NLRB v. Noel Canning (2014), the Court ruled that pro forma sessions count as real sessions. No recess means no recess appointment, and the Senate keeps its power to approve the ambassador.'},
+        {t:'Go on break as planned. Any appointment would only be temporary.', verdict:v=>v.days<10?'good':'risky', ps:5, next:'trial',
+         fb:v=>v.days<10
+          ? 'Good read. In NLRB v. Noel Canning (2014), the Court said a break of fewer than 10 days is usually too short to count as a “Recess” for appointments. Any appointment would almost certainly be struck down, and your senators get to go home.'
+          : 'Legal, but you handed the President a way around the Senate. A 21-day break counts as a recess, so the appointment is valid until “the End of their next Session” (Art. II, §2, cl.3), which could be more than a year.'},
+        {t:'Pass a law that bans recess appointments.', verdict:'bad', ps:0, next:'trial',
+         fb:'A law can’t take away a power the Constitution gives the President. Only a constitutional amendment (Art. V) could do that. The President would also simply veto your bill.'},
+        {t:'Sue the President now, before any appointment happens.', verdict:'bad', ps:-5, next:'trial',
+         fb:'Article III courts decide actual “Cases” and “Controversies.” Nothing has happened yet, so there is no case. A judge throws out your lawsuit within a week.'},
+      ]},
+    trial:{title:'The Impeachment Trial', kind:'knowledge', pocket:['I-3-6','II-2-1'],
+      text:v=>`The House has impeached federal judge Thomas Grady for taking bribes, and the Senate holds the trial. <b>${v.jy+v.jn} senators are present</b> for the final vote.<br><b>Verdict:</b> ${v.jy} guilty, ${v.jn} not guilty.`,
+      q:'What is the outcome?',
+      options:[
+        {t:'Judge Grady is convicted and removed from office.', verdict:v=>twoThirds(v.jy,v.jy+v.jn)?'good':'bad'},
+        {t:'Judge Grady stays. Conviction needed more votes than that.', verdict:v=>twoThirds(v.jy,v.jy+v.jn)?'bad':'good'},
+        {t:'He’s removed, but the President can pardon him back onto the bench.', verdict:'bad'},
+        {t:'He’s removed, but he can appeal the verdict to the Supreme Court.', verdict:'bad'},
+      ].map(o=>Object.assign(o,{ps:0,next:'end',
+        fb:v=>{const p=v.jy+v.jn; return `Article I, §3: no one is convicted “without the Concurrence of two thirds of the Members present.” With ${p} present, that takes ${need(p)} votes, and there were ${v.jy}, so Judge Grady is ${twoThirds(v.jy,p)?'removed':'acquitted'}. A pardon can’t touch impeachment (Art. II, §2), and in Nixon v. United States (1993) the Court said it won’t review how the Senate runs impeachment trials.`;}}))},
+  },
+  endings:{
+    best:['Pillar of the Senate','You guarded the Senate’s powers, followed the rules and kept your colleagues’ trust. Both parties call you a true institutionalist.'],
+    principled:['By the Book, Behind in the Polls','Your constitutional instincts were right, but voters back home wanted quicker wins. Your re-election race is going to be close.'],
+    mixed:['Power Player','You got things done, but you cut corners and misread the rules more than once. Your colleagues respect you, but they don’t always trust you.'],
+    bad:['Censured','You misunderstood the Senate’s own powers too often. Your party replaces you as Majority Leader.'],
+  }
+},
+/* ===================== 3. JUSTICE ===================== */
+{
+  id:'justice', title:'The Final Word', role:'Supreme Court Justice',
+  arts:'Art. III §1–3 · Art. I §10 · Art. V · Art. VI',
+  intro:'You have just been confirmed as the newest Justice of the Supreme Court. You hold your seat “during good Behaviour,” which in practice means for life. Your job is to decide real cases, and the Constitution limits which cases those can be.',
+  vars(){ return {act:pick(['speech','maps']), ev:pick(['one','twodiff','twosame','tv'])}; },
+  start:'docket',
+  scenes:{
+    docket:{title:'Your First Docket', kind:'knowledge', pocket:['III-2-1','III-2-2'],
+      text:'Four requests reach the Court this week. The Chief Justice asks which one the Court should take up first.',
+      q:'Which request should the Court take first?',
+      options:[
+        {t:'A senator asks whether a bill still being debated in Congress would be constitutional.', verdict:'bad', ps:0, set:{first:'treason'}, next:'treason',
+         fb:'Article III extends the judicial power to “Cases” and “Controversies,” meaning real disputes between real parties. In 1793 the Justices refused President Washington’s request for legal advice, and the Court has never given advisory opinions since. The Chief Justice moves on to a treason appeal instead.'},
+        {t:'The state of Westland is suing the state of Eastvale over a river dam.', verdict:'good', ps:5, set:{first:'water'}, next:'water',
+         fb:'Article III, §2: “in which a State shall be Party, the supreme Court shall have original Jurisdiction.” A lawsuit between two states starts at the Supreme Court, and only the Court can hear it.'},
+        {t:'A man convicted of treason is appealing his conviction.', verdict:'good', ps:5, set:{first:'treason'}, next:'treason',
+         fb:'This case arrives under the Court’s appellate jurisdiction (Art. III, §2). It was tried in a lower court and is now on appeal. Treason cases are rare, and this one could set an important precedent.'},
+        {t:'A company asks the Court to hear its contract dispute directly, skipping the lower courts.', verdict:'bad', ps:0, set:{first:'treason'}, next:'treason',
+         fb:'The Court has original jurisdiction only in cases involving ambassadors or a state as a party (Art. III, §2). Every other case must start in a lower court and reach the Court on appeal. The Chief Justice moves on to a treason appeal.'},
+      ]},
+    treason:{title:'United States v. Kane', kind:'knowledge', pocket:['III-3-1','III-2-1'],
+      text:v=>{
+        const act = v.act==='speech'
+          ? 'Daniel Kane posted dozens of furious videos calling the government corrupt and urging people to vote every member of Congress out of office.'
+          : 'Daniel Kane, a defense contractor, sold secret military maps to agents of Dravonia, a nation at war with the United States.';
+        const ev = {one:'At his trial, <b>one witness</b>, a coworker, testified that she saw him do it.',
+          twodiff:'At his trial, <b>two witnesses</b> testified. Each described a <b>different</b> incident on a different day.',
+          twosame:'At his trial, <b>two witnesses</b> testified that they both saw the <b>same</b> incident on the same day.',
+          tv:'The main evidence was a <b>confession Kane gave in a TV interview</b> before his arrest.'}[v.ev];
+        return `${act} ${ev} He was convicted of treason, and his lawyers appeal.`;},
+      q:'How do you vote?',
+      options:[
+        {t:'Uphold the conviction. This is treason, proven the way the Constitution requires.', verdict:v=>(v.act==='maps'&&v.ev==='twosame')?'good':'bad'},
+        {t:'Overturn it. The evidence doesn’t meet the Constitution’s rule for treason trials.', verdict:v=>v.ev!=='twosame'?'good':'bad'},
+        {t:'Overturn it. What he did isn’t treason as the Constitution defines it.', verdict:v=>v.act==='speech'?'good':'bad'},
+        {t:'Send it to Congress, because treason is a political question.', verdict:'bad'},
+      ].map(o=>Object.assign(o,{ps:0, next:(v,f)=>f.first==='water'?'law':'water',
+        fb:v=>{
+          const def = v.act==='maps'
+            ? 'Selling military secrets to a nation at war with the U.S. is “adhering to their Enemies, giving them Aid and Comfort.” That fits the definition.'
+            : 'Harsh criticism of the government is neither levying war nor aiding an enemy. The Founders defined treason narrowly so it couldn’t be used to punish critics.';
+          const evx = {one:'One witness is not enough.',
+            twodiff:'Two witnesses to different acts don’t count; they must see the same act (Cramer v. United States, 1945).',
+            twosame:'Two witnesses to the same act meets the rule.',
+            tv:'A TV interview isn’t “open Court.”'}[v.ev];
+          return `Article III, §3 defines treason as “only” levying war against the U.S. or aiding its enemies. ${def} It also requires “two Witnesses to the same overt Act, or … Confession in open Court.” ${evx} Courts, not Congress, decide treason cases.`;}}))},
+    water:{title:'Westland v. Eastvale', kind:'knowledge', pocket:['III-2-2','I-10-3','VI-2'],
+      text:'Westland built a dam that cut the river’s flow into Eastvale in half. In 1952 the two states signed a compact to share the river’s water equally, and Congress approved it. Westland now says the compact is out of date and it can keep the water. Because one state is suing another, the case came straight to the Supreme Court.',
+      q:'How should the Court rule?',
+      options:[
+        {t:'For Eastvale. A compact approved by Congress is binding federal law.', verdict:'good', ps:5,
+         fb:'Under Article I, §10, states may make compacts only “with the Consent of Congress.” Once Congress approves one, it is treated as federal law (Cuyler v. Adams, 1981), and under the Supremacy Clause (Art. VI) a state can’t simply walk away from it.'},
+        {t:'Dismiss the case. States should settle their own disputes.', verdict:'bad', ps:0,
+         fb:'The judicial power covers “Controversies between two or more States” (Art. III, §2), and the Court has original jurisdiction when a state is a party. Settling disputes between states is exactly what the Court is for.'},
+        {t:'Refer the case to the President, who manages relations between states.', verdict:'bad', ps:0,
+         fb:'Nothing in Article II gives the President power to settle legal disputes between states. Article III gives that job to the courts.'},
+        {t:'For Westland. A state may leave a compact once it decides it’s outdated.', verdict:'bad', ps:0,
+         fb:'A compact approved by Congress is federal law, and the Supremacy Clause (Art. VI) makes it binding on the states. Westland can ask Congress and Eastvale to change it, but it can’t back out on its own.'},
+      ].map(o=>Object.assign(o,{next:(v,f)=>f.first==='water'?'treason':'law'}))},
+    law:{title:'The Court Efficiency Act', kind:'knowledge', pocket:['III-1','III-2-1'],
+      text:'Angry about recent rulings, Congress passes the Court Efficiency Act. Part 1 requires the Supreme Court to give its opinion on any bill a member of Congress asks about. Part 2 cuts every sitting federal judge’s salary by 10 percent. A group of federal judges sues.',
+      q:'How do you rule?',
+      options:[
+        {t:'Strike down both parts.', verdict:'good', ps:-5,
+         fb:'Part 1 violates Article III’s “Cases” and “Controversies” limit. Part 2 violates Article III, §1: a judge’s pay “shall not be diminished during their Continuance in Office.” Striking down a law that violates the Constitution is judicial review, established in Marbury v. Madison (1803).'},
+        {t:'Strike down the pay cut only. Advisory opinions would help Congress.', verdict:'partial', ps:0,
+         fb:'You’re right that the pay cut violates Article III, §1. But requiring advisory opinions violates the “Cases” and “Controversies” limit, so courts can’t give opinions on bills that aren’t real disputes.'},
+        {t:'Strike down the advisory-opinion part only. Congress sets judges’ pay.', verdict:'partial', ps:0,
+         fb:'You’re right about advisory opinions. Congress does set judges’ pay, but Article III, §1 says it can never be “diminished” for sitting judges. That protects judges from being punished for their rulings.'},
+        {t:'Uphold both parts. Congress created the federal courts, so it controls them.', verdict:'bad', ps:5,
+         fb:'Congress creates the lower courts and sets the Court’s size, but it can’t override Article III’s specific protections. Without those protections, judges could be pressured by threats to their pay.'},
+      ].map(o=>Object.assign(o,{next:'amend'}))},
+    amend:{title:'The Backlash', kind:'knowledge', pocket:['V'],
+      text:'Congressional leaders are furious about your ruling. They propose a constitutional amendment allowing Congress to request advisory opinions. A reporter stops you on the Court steps and asks: “If this amendment is ratified, will the Court strike it down?”',
+      q:'What is the most accurate answer?',
+      options:[
+        {t:'“No. Once it’s ratified, an amendment is part of the Constitution itself.”', verdict:'good', ps:0,
+         fb:'Correct. Under Article V, once three-fourths of the states ratify an amendment, it is “valid to all Intents and Purposes, as Part of this Constitution.” The Court interprets the Constitution; it can’t strike part of it down.'},
+        {t:'“Yes, if it conflicts with the original Article III.”', verdict:'bad', ps:0,
+         fb:'Amendments change the original text. Several have been ratified to overturn Supreme Court decisions, including the 11th, 16th and 26th Amendments. A ratified amendment becomes part of the Constitution (Art. V).'},
+        {t:'“Only if the President vetoes it first.”', verdict:'bad', ps:0,
+         fb:'Presidents have no role in the amendment process (Hollingsworth v. Virginia, 1798). Congress, or a convention, proposes amendments, and the states ratify them.'},
+        {t:'“The Court can strike down any part of the Constitution it finds unfair.”', verdict:'bad', ps:-5,
+         fb:'Judicial review lets the Court strike down laws that conflict with the Constitution, not the Constitution itself. Fairness arguments belong in the amendment process (Art. V).'},
+      ].map(o=>Object.assign(o,{next:'enforce'}))},
+    enforce:{title:'No Army, No Purse', kind:'decision', pocket:['II-3','VI-2','VI-3'],
+      text:'Back to the river case. Westland’s governor refuses to follow the Court’s ruling. “The Court has made its decision,” he says. “Now let it enforce it.” Water still isn’t reaching Eastvale’s farms.',
+      q:'What should the Court do?',
+      options:[
+        {t:'Rely on the President, whose job is to enforce federal law.', verdict:'good', ps:5,
+         fb:'Courts have no army and no budget, so they depend on the executive branch to “take Care that the Laws be faithfully executed” (Art. II, §3). In 1957, President Eisenhower sent troops to Little Rock to enforce a desegregation ruling. In Cooper v. Aaron (1958), the Court reminded every state official that its rulings bind them.'},
+        {t:'Issue an order and have federal marshals enforce it at the dam.', verdict:'risky', ps:0,
+         fb:'Federal courts can issue orders that U.S. Marshals enforce. But marshals work for the executive branch, and sending them against a state’s own police could escalate fast without the President’s support.'},
+        {t:'Rewrite the ruling into something Westland is willing to accept.', verdict:'bad', ps:5,
+         fb:'Changing a ruling because a state threatens to ignore it would show every official that defiance works. Article VI makes federal law “the supreme Law of the Land,” and state officials swear an oath to support it.'},
+        {t:'Do nothing. The Court has ruled, and its job is done.', verdict:'risky', ps:-5,
+         fb:'In Worcester v. Georgia (1832), the Court ruled for the Cherokee Nation, but Georgia ignored the ruling and President Jackson didn’t enforce it. Without enforcement, a ruling can turn out to be empty.'},
+      ].map(o=>Object.assign(o,{next:'end'}))},
+  },
+  endings:{
+    best:['The Great Justice','Your opinions are clear, careful and grounded in the text. Law students will be reading them for generations.'],
+    principled:['Respected but Resented','You applied the Constitution faithfully, even when it made people angry. Congress and the public are frustrated with you.'],
+    mixed:['Politician in a Robe','Some of your rulings were sound, but others bent the Constitution to fit the moment. Critics say you decide first and find reasons later.'],
+    bad:['Court in Crisis','Too many of your rulings ignored the Constitution’s text. Public trust in the Court is falling, and Congress is drafting bills to rein it in.'],
+  }
+},
+/* ===================== 4. GOVERNOR ===================== */
+{
+  id:'governor', title:'State vs. Nation', role:'Governor of Westland',
+  arts:'Art. I §10 · Art. IV §1–4 · Art. VI',
+  intro:'You are Governor of the state of Westland. The state budget is short, your neighbors are angry and protests are growing. You have real power, but Articles I, IV and VI put firm limits on what any state can do.',
+  vars(){ return {fee:pick(['high','fair']), legis:pick(['session','blocked'])}; },
+  start:'budget',
+  scenes:{
+    budget:{title:'Empty Treasury', kind:'decision', pocket:['I-10-1','I-10-2','I-10-3'],
+      text:'Westland faces a $2 billion budget gap. Your legislature sends you four plans and asks you to choose one.',
+      q:'Which plan do you choose?',
+      options:[
+        {t:'Print “Westland Dollars” that residents can use to pay state taxes.', verdict:'bad', ps:10,
+         fb:'Article I, §10: “No State shall … coin Money; emit Bills of Credit.” Only the federal government issues currency. A federal court blocks the plan before the first bill is printed.'},
+        {t:'Tax every shipment arriving at Westland’s seaport from other countries.', verdict:'bad', ps:10,
+         fb:'Article I, §10: “No State shall, without the Consent of the Congress, lay any Imposts or Duties on Imports.” Shippers sue, and the tax is blocked.'},
+        {t:'Partner with Eastvale on a shared toll bridge, with Congress’s approval.', verdict:'good', ps:5,
+         fb:'Article I, §10 lets states form compacts “with the Consent of Congress.” Congress approves, and the bridge tolls will help close the gap over time.'},
+        {t:'Raise Westland’s state income tax by one percentage point.', verdict:'good', ps:-10,
+         fb:'States keep the power to tax their own residents (see the 10th Amendment). It’s legal and it closes the gap quickly, but it is very unpopular.'},
+      ].map(o=>Object.assign(o,{next:'fugitive'}))},
+    fugitive:{title:'The Fugitive', kind:'decision', pocket:['IV-2-2'],
+      text:'Ray Dalton is arrested in Westland. He is charged with armed robbery in Eastvale, and Eastvale’s governor formally demands that you send him back. Dalton grew up in Westland, many locals believe he’s innocent, and a crowd is gathering outside the jail.',
+      q:'What do you do with Ray Dalton?',
+      options:[
+        {t:'Send him back to Eastvale to stand trial.', verdict:'good', ps:-5,
+         fb:'Article IV, §2: a person charged with a crime who flees to another state “shall on Demand … be delivered up.” Returning him is your duty. The crowd boos, but the Constitution is clear.'},
+        {t:'Refuse to send him back, because you believe he’s innocent.', verdict:'bad', ps:10,
+         fb:'Guilt is decided at trial, not by the governor. In Puerto Rico v. Branstad (1987), the Court ruled that federal courts can order a governor to return a fugitive. A judge orders Dalton returned, and you look like you defied the Constitution.'},
+        {t:'Try him in a Westland court instead, where locals can judge him.', verdict:'bad', ps:5,
+         fb:'Westland has no authority over a crime committed in Eastvale. The Extradition Clause sends him back “to the State having Jurisdiction of the Crime.”'},
+        {t:'Confirm the paperwork is valid and he’s the right person, then return him.', verdict:'good', ps:0,
+         fb:'A governor may check that the demand is properly made and that this is the person charged. Once those check out, returning him is required. You followed the Constitution and showed the public you were careful.'},
+      ].map(o=>Object.assign(o,{next:'license'}))},
+    license:{title:'The Shrimp License Bill', kind:'knowledge', pocket:['IV-2-1'],
+      text:v=> v.fee==='high'
+        ? 'Your legislature passes a bill to protect Westland’s shrimp boats. A commercial shrimping license would cost <b>$25 for Westland residents</b> and <b>$2,500 for residents of other states</b>.'
+        : 'Your legislature passes a bill on commercial shrimping licenses: <b>$25 for Westland residents</b> and <b>$40 for residents of other states</b>. A state audit shows that patrolling out-of-state boats costs about $15 more per license.',
+      q:'Do you sign the bill?',
+      options:[
+        {t:'Sign it into law as written.', verdict:v=>v.fee==='fair'?'good':'bad', ps:v=>v.fee==='fair'?5:10},
+        {t:'Veto it. States can’t charge out-of-staters more for anything.', verdict:v=>v.fee==='high'?'good':'partial', ps:-5},
+        {t:'Sign it, but exempt residents of Eastvale, your closest ally.', verdict:'bad', ps:5},
+        {t:'Sign it, then ask Congress to approve it so it can’t be challenged.', verdict:'bad', ps:0},
+      ].map(o=>Object.assign(o,{next:'judgment',
+        fb:(v)=>`Article IV, §2: citizens of each state are entitled to the “Privileges and Immunities” of citizens in the other states. In Toomer v. Witsell (1948), the Court struck down a South Carolina law charging out-of-state shrimpers $2,500 instead of $25. `+
+          (v.fee==='high' ? 'This bill is almost the same law, so it’s unconstitutional.' : 'A small difference tied to real extra costs is generally allowed, so a veto that says states can “never” charge more goes too far.')+
+          ' Favoring one state’s citizens over another’s is never allowed, and Congress can’t approve away a right the Constitution itself guarantees.'}))},
+    judgment:{title:'The Court Judgment', kind:'decision', pocket:['IV-1'],
+      text:'An Eastvale court orders PetroCo, a Westland company, to pay $2 million to an Eastvale family whose farm it polluted. PetroCo is Westland’s biggest employer. Its CEO asks you to keep the family from collecting the money in Westland.',
+      q:'What do you tell PetroCo?',
+      options:[
+        {t:'Westland will honor the Eastvale court’s judgment.', verdict:'good', ps:-5,
+         fb:'Article IV, §1: “Full Faith and Credit shall be given in each State to the … judicial Proceedings of every other State.” PetroCo pays, and Westland’s business leaders grumble.'},
+        {t:'Order Westland courts to ignore the Eastvale judgment.', verdict:'bad', ps:10,
+         fb:'The Full Faith and Credit Clause exists to stop this. Without it, anyone could escape a court judgment by crossing a state line. The family takes the case to federal court and wins.'},
+        {t:'Have a Westland court retry the whole case from scratch.', verdict:'bad', ps:5,
+         fb:'Retrying the case would deny the Eastvale ruling the “Full Faith and Credit” that Article IV, §1 requires. PetroCo already had its chance in Eastvale’s courts.'},
+        {t:'Advise PetroCo to appeal through Eastvale’s own court system.', verdict:'good', ps:5,
+         fb:'Smart and lawful. Full Faith and Credit means respecting Eastvale’s courts, and that includes their appeals process. If PetroCo loses there, it pays.'},
+      ].map(o=>Object.assign(o,{next:'unrest'}))},
+    unrest:{title:'Unrest at the Capitol', kind:'decision', pocket:['IV-4','VI-2','VI-3'],
+      text:v=>`Protests against a new federal water law turn violent. ${v.legis==='session'
+        ? 'Rioters break into the state capitol, but <b>your legislature is still able to meet</b> at a courthouse across town.'
+        : 'Rioters occupy the state capitol, and <b>your legislature cannot meet anywhere</b>.'} Local police are overwhelmed. Some protesters demand that Westland declare the federal law void.`,
+      q:'What is your move?',
+      options:[
+        {t:'Ask the legislature to formally request help from the federal government.', verdict:v=>v.legis==='session'?'good':'bad', ps:5,
+         fb:v=>v.legis==='session'
+          ? 'Article IV, §4: the U.S. protects each state against domestic violence “on Application of the Legislature.” Your legislature can meet, so the request comes from it. Federal help arrives within a day.'
+          : 'Your legislature can’t meet, so it can’t make the request. Article IV, §4 lets the governor apply “when the Legislature cannot be convened,” and that was your job. Hours are lost while the violence spreads.'},
+        {t:'Formally request federal help yourself, as governor.', verdict:v=>v.legis==='blocked'?'good':'risky', ps:5,
+         fb:v=>v.legis==='blocked'
+          ? 'Article IV, §4 lets the governor apply “when the Legislature cannot be convened.” Yours can’t meet, so the request is yours to make. Federal help arrives within a day.'
+          : 'Article IV, §4 gives this request to the legislature, and to the governor only “when the Legislature cannot be convened.” Yours can still meet, so the White House questions your request and help is delayed.'},
+        {t:'Declare the federal water law void in Westland to calm the crowds.', verdict:'bad', ps:10,
+         fb:'Article VI makes federal law “the supreme Law of the Land … any Thing in the Constitution or Laws of any State to the Contrary notwithstanding.” States can’t cancel federal laws. That idea, called nullification, has been rejected since the 1830s, and you swore an oath to support the Constitution (Art. VI, cl.3).'},
+        {t:'Ask the President to take over Westland’s government until order returns.', verdict:'bad', ps:-10,
+         fb:'Article IV, §4 guarantees each state “a Republican Form of Government.” The federal government protects states; it doesn’t replace their elected leaders. The President declines.'},
+      ].map(o=>Object.assign(o,{next:'end'}))},
+  },
+  endings:{
+    best:['Model Governor','You protected Westland’s interests while respecting the Constitution’s limits. Other governors are calling you for advice.'],
+    principled:['Lawful but Unloved','You kept Westland inside the Constitution, but voters wanted you to fight harder. Your approval rating is underwater.'],
+    mixed:['Popular Rebel','Crowds love your defiance, but courts keep overturning your actions. Westland spends millions on lawsuits it keeps losing.'],
+    bad:['Governor in Defiance','You put Westland on a collision course with the Constitution. Federal courts have overruled you again and again, and legislators are discussing your removal.'],
+  }
+},
+];
+const CRISIS = Object.fromEntries(CRISES.map(c=>[c.id,c]));
+
+// ---------- NEWSPAPER HEADLINES (by crisis → scene → original option index) ----------
+const pass2 = (y,p) => twoThirds(y,p);
+const HEAD = {
+  president:{
+    desk:['President Signs Smart Highway Act Into Law','President Vetoes Highway Act, Dares Congress to Override',
+      v=>v.days<10?'Pocket Veto! Highway Act Dies as Congress Leaves Town':'Highway Act Becomes Law Without President’s Signature',
+      'Court Voids President’s Cross-Out; Full Highway Act Stands'],
+    override:Array(4).fill(v=>{const H=pass2(v.h,435),S=pass2(v.s,100);
+      return H&&S?`Congress Overrides Veto ${v.h}–${435-v.h} and ${v.s}–${100-v.s}`:`Override Falls Short in ${!H&&!S?'Both Houses':!H?'House':'Senate'}; Veto Stands`;}),
+    enforce:['Justice Department Takes Voltan Motors to Court','President Refuses to Enforce Highway Law; Congress Fumes',
+      'Troops at Voltan Plant Spark Outcry; Court Blocks Seizure','President Asks Congress for Two-Year Delay'],
+    budget:['Budget Vetoed; Government Shuts Down at Midnight','Budget Signed, and Highway Act Rides Along',
+      'President Signs Budget, Vows to Ignore Highway Section','Treasury Rejects President’s Unauthorized Spending Order'],
+    shutdown:['Shutdown Ends in Deal; Highway Act Dropped','President Holds Firm in Prime-Time Address',
+      'Treasury Lawyers Refuse Order to Pay Workers','President’s Adjournment Threat Falls Flat'],
+    ruling:['President Accepts Ruling, Proposes Federal Inspectors','President Defies Court; Governors Refuse Orders',
+      'President’s Amendment Plan Hits Constitutional Wall','Court Expansion Plan Splits President’s Own Party'],
+  },
+  senator:{
+    vacancy:['Senate Sets Hearings for Judge Park','Majority Leader Blocks Hearings Until After Election',
+      'Senate Changes Rules: Simple Majority Ends Debate','Leader Urges President to Seat Judge Without a Vote'],
+    confirm:Array(4).fill(v=>v.cy===v.cn?'Vice President Breaks 50–50 Tie; Park Confirmed':v.cy>v.cn?`Park Confirmed, ${v.cy}–${v.cn}`:`Senate Rejects Park, ${v.cy}–${v.cn}`),
+    treaty:Array(4).fill(v=>pass2(v.ty,v.ty+v.tn)?`Senate Approves Valdora Treaty, ${v.ty}–${v.tn}`:`Valdora Treaty Fails, ${v.ty}–${v.tn}`),
+    recess:['Three-Day Sessions Block Recess Appointment',
+      v=>v.days<10?'Senate Takes Short Break; Any Appointment Unlikely to Hold':'President Fills Ambassador Post During Senate Recess',
+      'Recess-Appointment Ban Dead on Arrival','Judge Tosses Senate Lawsuit: “No Case Yet”'],
+    trial:Array(4).fill(v=>pass2(v.jy,v.jy+v.jn)?`Senate Convicts Judge Grady, ${v.jy}–${v.jn}`:`Judge Grady Acquitted; Conviction Falls Short, ${v.jy}–${v.jn}`),
+  },
+  justice:{
+    docket:['Court Declines Senator’s Request for Advice','Court Takes Up Westland v. Eastvale',
+      'Court Agrees to Hear Treason Appeal','Court Turns Away Company’s Shortcut'],
+    treason:['Supreme Court Upholds Kane Treason Conviction','Court Tosses Kane Conviction Over Evidence Rule',
+      'Court Rules Kane’s Actions Were Not Treason','Court Hands Treason Case to Congress'],
+    water:['Court Sides With Eastvale: Compact Is Federal Law','Court Refuses River Case, Leaving States Stunned',
+      'Court Hands River Fight to White House','Court Lets Westland Walk Away From Water Compact'],
+    law:['Court Strikes Down Court Efficiency Act','Court Blocks Judges’ Pay Cut, Keeps Advisory Opinions',
+      'Court Ends Advisory Opinions, Allows Pay Cut','Court Upholds Efficiency Act in Surprise Ruling'],
+    amend:['Justice: “A Ratified Amendment Is the Constitution”','Justice Hints Court Could Strike Down an Amendment',
+      'Justice’s Veto Remark Puzzles Scholars','Justice Claims Power Over “Unfair” Constitution'],
+    enforce:['President Moves to Enforce River Ruling','Marshals Sent to Dam as Standoff Looms',
+      'Court Softens River Ruling After Threats','Court Silent as Westland Defies Ruling'],
+  },
+  governor:{
+    budget:['Court Blocks “Westland Dollars”','Port Tax Blocked: States Can’t Tax Imports',
+      'Congress Approves Westland–Eastvale Toll Bridge','Governor Raises Income Tax to Close Gap'],
+    fugitive:['Dalton Sent Back to Eastvale for Trial','Governor Refuses to Return Fugitive',
+      'Westland Tries to Put Dalton on Trial at Home','Governor Checks Papers, Then Returns Dalton'],
+    license:[v=>v.fee==='fair'?'Governor Signs Shrimp License Law':'Governor Signs 100-Times Shrimp Fee for Out-of-Staters',
+      'Governor Vetoes Shrimp License Bill','Shrimp Law Exempts Eastvale Only','Governor Asks Congress to Approve Shrimp Fees'],
+    judgment:['Westland Will Honor Eastvale Ruling; PetroCo Pays','Governor Orders Courts to Ignore Eastvale Judgment',
+      'Westland Orders Retrial of PetroCo Case','PetroCo Appeals Through Eastvale Courts'],
+    unrest:[v=>v.legis==='session'?'Legislature Requests Federal Help':'Request Stalls: Legislature Can’t Meet',
+      v=>v.legis==='blocked'?'Governor Requests Federal Help':'Governor’s Request Questioned; Help Delayed',
+      'Governor Declares Federal Water Law Void','Governor Asks President to Take Over State'],
+  },
+};
+// optional scene art; falls back to the crisis cover if the file isn't there
+const SCENE_IMG = {
+  president:{override:'override', budget:'shutdown', shutdown:'shutdown'},
+  senator:{treaty:'treaty', recess:'treaty'},
+  justice:{treason:'treason', water:'river', enforce:'river'},
+  governor:{fugitive:'fugitive', license:'shrimp', unrest:'unrest'},
+};
+const STAMP = {
+  decision:{good:'Constitutional',risky:'Risky',partial:'Partly Right',bad:'Unconstitutional'},
+  knowledge:{good:'Correct',risky:'Risky',partial:'Partly Right',bad:'Incorrect'},
+};
+const PAPER_LINE = {president:'Washington Edition', senator:'Capitol Hill Edition', justice:'Court Edition', governor:'Westland Edition'};
+
+// ---------- SCORING ----------
+const VERDICT = {
+  decision:{good:'Constitutional',risky:'Legal, but risky',partial:'Partly right',bad:'Unconstitutional'},
+  knowledge:{good:'Correct',risky:'Legal, but risky',partial:'Partly right',bad:'Incorrect'},
+};
+function csDelta(verdict, kind){ return {good:10, partial:0, risky:-5, bad: kind==='knowledge'?-10:-15}[verdict]; }
+function endingKey(s){
+  if(s.cs<40) return 'bad';
+  if(s.cs>=75 && s.ps>=50) return 'best';
+  if(s.cs>=60 && s.ps<50) return 'principled';
+  return 'mixed';
+}
+const ENDING_ORDER = ['best','principled','mixed','bad'];
+const clamp = x => Math.max(0, Math.min(100, x));
+
+// ---------- SAVED PROGRESS (this device only) ----------
+function load(){ try{ return JSON.parse(localStorage.getItem('cc-progress')||'{}'); }catch(e){ return {}; } }
+function save(p){ try{ localStorage.setItem('cc-progress', JSON.stringify(p)); }catch(e){} }
+let PROG = load(); PROG.endings = PROG.endings||{}; PROG.best = PROG.best||{}; PROG.name = PROG.name||'';
+
+// ---------- GAME STATE ----------
+let S = null;
+let UI = {pocket:false, prev:null};
+const $app = document.getElementById('app'), $layer = document.getElementById('layer');
+const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function startCrisis(id){
+  const c = CRISIS[id];
+  S = {id, v:c.vars(), f:{}, cs:60, ps:50, scene:c.start, order:null, picked:null, history:[], t0:Date.now()};
+  UI.prev = {cs:60, ps:50};
+  enterScene();
+}
+function enterScene(){
+  const sc = CRISIS[S.id].scenes[S.scene];
+  S.order = sc.options.map((_,i)=>i);
+  for(let i=S.order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[S.order[i],S.order[j]]=[S.order[j],S.order[i]];}
+  S.picked = null; UI.prev = {cs:S.cs, ps:S.ps}; render(); window.scrollTo(0,0);
+}
+function choose(i){
+  if(S.picked!==null) return;
+  const c = CRISIS[S.id], sc = c.scenes[S.scene], o = sc.options[i];
+  const verdict = val(o.verdict, S);
+  const dcs = csDelta(verdict, sc.kind);
+  let dps = val(o.ps, S)||0;
+  if(sc.kind==='knowledge' && verdict==='bad') dps -= 5;
+  UI.prev = {cs:S.cs, ps:S.ps};
+  S.cs = clamp(S.cs + dcs); S.ps = clamp(S.ps + dps);
+  Object.assign(S.f, val(o.set, S)||{});
+  const fb = val(o.fb, S);
+  const hl = ((HEAD[S.id]||{})[S.scene]||[])[i];
+  S.picked = {i, verdict, dcs, dps, fb, head: hl ? val(hl, S) : sc.title, next: val(o.next, S)};
+  S.history.push({title:sc.title, kind:sc.kind, choice:o.t, verdict, head:S.picked.head});
+  render();
+  setTimeout(()=>{ const el=document.getElementById('fb'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }, 60);
+}
+function cont(){
+  if(S.picked.next==='end'){ finish(); return; }
+  S.scene = S.picked.next; enterScene();
+}
+function finish(){
+  const c = CRISIS[S.id]; const key = endingKey(S);
+  const good = S.history.filter(h=>h.verdict==='good').length;
+  const pct = Math.round(100*good/S.history.length);
+  S.end = {key, good, n:S.history.length, pct, mins:Math.max(1,Math.round((Date.now()-S.t0)/60000)), when:new Date()};
+  const got = new Set(PROG.endings[S.id]||[]); got.add(key); PROG.endings[S.id]=[...got];
+  PROG.best[S.id] = Math.max(PROG.best[S.id]||0, pct); save(PROG);
+  UI.prev = {cs:S.cs, ps:S.ps};
+  S.scene = null; render(); window.scrollTo(0,0);
+}
+function reportCode(){
+  const str = `${PROG.name}|${S.id}|${S.end.key}|${S.end.good}/${S.end.n}|${S.end.when.toDateString()}`;
+  let h = 7; for(const ch of str) h = (h*31 + ch.charCodeAt(0)) >>> 0;
+  return (h.toString(36).toUpperCase()+'XXXXXX').slice(0,6);
+}
+
+// ---------- DRAWING HELPERS ----------
+const IMG = n => `images/${n}.jpg`;
+// <img> that hides itself if the file is missing, or swaps to a fallback
+const img = (src, alt, fallback) => fallback
+  ? `<img src="${src}" alt="${esc(alt)}" onerror="this.onerror=null;this.classList.add('fallback');this.src='${fallback}'">`
+  : `<img src="${src}" alt="${esc(alt)}" onerror="this.remove()">`;
+function arcPath(a, b, r){ // a,b in 0..100 along a top semicircle centred at (60,62)
+  const pt = p => { const t = Math.PI*(1-p/100); return [60 + r*Math.cos(t), 62 - r*Math.sin(t)]; };
+  const [x1,y1]=pt(a), [x2,y2]=pt(b);
+  return `M${x1.toFixed(1)} ${y1.toFixed(1)} A${r} ${r} 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+}
+const ang = p => -90 + 1.8*p;
+function gauge(kind, value, prev, delta, label){
+  const zones = kind==='cs'
+    ? [[0,40,'#b8483c'],[40,75,'#d09a3a'],[75,100,'#4f9a5f']]
+    : [[0,50,'#8c7d64'],[50,100,'#d8b867']];
+  const d = delta==null ? '' : `<span class="delta ${delta>0?'up':delta<0?'down':'zero'}">${delta>0?'+':''}${delta}</span>`;
+  return `<div class="gauge" title="${esc(label)}">
+    <svg viewBox="0 0 120 70" aria-hidden="true">
+      ${zones.map(z=>`<path d="${arcPath(z[0],z[1],48)}" fill="none" stroke="${z[2]}" stroke-width="10"/>`).join('')}
+      <path d="${arcPath(0,100,56)}" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+      <g class="needle" data-to="${ang(value)}" style="transform:rotate(${ang(prev)}deg)">
+        <path d="M58 62 L60 18 L62 62 Z" fill="#fff"/>
+      </g>
+      <circle cx="60" cy="62" r="6" fill="#d8b867" stroke="#17243f" stroke-width="2"/>
+    </svg>
+    <div><div class="gv">${value}${d}</div><div class="gl">${label.replace(/^(\S+) /,'<span class="long">$1 </span>')}</div></div>
+  </div>`;
+}
+function gauges(showDelta){
+  const p = S.picked;
+  return `<div class="gauges" role="group" aria-label="Constitutional Standing ${S.cs}, Public Support ${S.ps}">
+    ${gauge('cs', S.cs, UI.prev?UI.prev.cs:S.cs, showDelta&&p?p.dcs:null, 'Constitutional Standing')}
+    ${gauge('ps', S.ps, UI.prev?UI.prev.ps:S.ps, showDelta&&p?p.dps:null, 'Public Support')}
+  </div>`;
+}
+function animateNeedles(){
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll('.needle[data-to]').forEach(n=>{ n.style.transform = `rotate(${n.dataset.to}deg)`; });
+  }));
+}
+const SCROLL_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 0 2 2H8a2 2 0 0 1-2-2V4z"/><path d="M6 4a2 2 0 0 0-2 2v2h2"/><path d="M9.5 9h6M9.5 12.5h6M9.5 16h4"/></svg>`;
+const today = () => new Date().toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// ---------- RENDER ----------
+function render(){
+  if(!S) renderHome();
+  else if(S.scene===null) renderEnd();
+  else renderScene();
+  animateNeedles();
+}
+function renderHome(){
+  const total = CRISES.reduce((n,c)=>n+(PROG.endings[c.id]||[]).length,0);
+  $app.innerHTML = `
+  <header class="hero">
+    <div class="collage" aria-hidden="true">${CRISES.map(c=>img(IMG(c.id),'')).join('')}</div>
+    <div class="stars">★ ★ ★ ★ ★</div>
+    <div class="eyebrow" style="margin-top:10px">American Government · The Articles of the Constitution</div>
+    <h1>Constitutional Crisis</h1>
+    <p>Step into four seats of power. Every choice has consequences. Stay within the Constitution and keep the public with you, and read carefully, because the facts change every time you play.</p>
+  </header>
+  <div class="paper pad namebox">
+    <div style="flex:1;min-width:240px">
+      <label for="nm" class="eyebrow" style="color:var(--navy)">Your name (for your report card)</label>
+      <div style="margin-top:8px"><input id="nm" maxlength="40" value="${esc(PROG.name)}" placeholder="First and last name" autocomplete="name"></div>
+    </div>
+    <div class="tally">Endings discovered<br><b style="font:900 30px var(--display)">${total}</b> <span>of ${CRISES.length*4}</span></div>
+  </div>
+  <div class="cards">
+    ${CRISES.map((c,i)=>{const got=PROG.endings[c.id]||[];
+      return `<button class="ccard" data-act="start" data-id="${c.id}" aria-label="Play ${esc(c.title)} as ${esc(c.role)}">
+        <div class="art">${img(IMG(c.id), c.role)}<span class="num">Crisis ${i+1}</span></div>
+        <div class="body">
+          <h2>${esc(c.title)}</h2>
+          <div class="role">You are the ${esc(c.role)}</div>
+          <div class="arts">${esc(c.arts)}</div>
+          <div class="seals" aria-label="${got.length} of 4 endings found">${ENDING_ORDER.map(k=>`<span class="seal ${got.includes(k)?'on':''}">${got.includes(k)?'★':''}</span>`).join('')}
+            <span class="small sans muted" style="margin-left:6px">${got.length}/4 endings${PROG.best[c.id]!=null?` · best ${PROG.best[c.id]}%`:''}</span></div>
+        </div>
+      </button>`;}).join('')}
+  </div>
+  <div class="paper pad how">
+    <h3>How it works</h3>
+    <ul>
+      <li><b>Constitutional Standing</b> rises when you act within your powers or read the Constitution correctly, and falls when you overstep or misread it.</li>
+      <li><b>Public Support</b> rises and falls with popular choices. Some unconstitutional moves are popular at first, so watch out.</li>
+      <li>Open the <b>Pocket Constitution</b> on any decision to read the actual text that applies.</li>
+      <li>Each crisis takes 10–15 minutes and has four endings. Your report card appears at the end.</li>
+    </ul>
+  </div>`;
+  $layer.innerHTML = '';
+}
+function topbar(){
+  const c = CRISIS[S.id];
+  return `<div class="topbar">
+    <div><div class="t">${esc(c.title)}</div><div class="r">${esc(c.role)} · <button class="quit noprint" data-act="quit">Quit</button></div></div>
+    ${gauges(true)}
+  </div>`;
+}
+function renderScene(){
+  const c = CRISIS[S.id], sc = c.scenes[S.scene], first = S.history.length===0, p = S.picked;
+  const sceneImg = (SCENE_IMG[S.id]||{})[S.scene];
+  const banner = sceneImg ? img(IMG(sceneImg), sc.title, IMG(c.id)) : img(IMG(c.id), c.role);
+  const opts = S.order.map((i,k)=>{
+    const o = sc.options[i];
+    const cls = p ? (p.i===i?'opt picked':'opt faded') : 'opt';
+    return `<button class="${cls}" data-act="choose" data-i="${i}" ${p?'disabled':''}><span class="k">${'ABCD'[k]}</span><span>${esc(o.t)}</span></button>`;
+  }).join('');
+  const paras = p ? p.fb.split(/(?<=\.)\s+(?=[A-Z“(])/).reduce((acc,s)=>{ // two short paragraphs for the clipping
+    if(acc.length<2 && (acc.length===0 || acc[acc.length-1].length>140)) acc.push(s); else acc[acc.length-1]+=' '+s; return acc; },[]) : [];
+  $app.innerHTML = `
+  ${topbar()}
+  <div class="banner">${banner}<div class="cap"><div class="step">Decision ${S.history.length + (p?0:1)}</div><h2>${esc(sc.title)}</h2></div></div>
+  <div class="paper pad scene">
+    ${first && !p ? `<p class="intro">${esc(c.intro)}</p>`:''}
+    <div class="story">${val(sc.text, S)}</div>
+    <div class="q">${esc(sc.q)}</div>
+    <div class="opts">${opts}</div>
+    ${p ? `<article id="fb" class="clip" aria-live="polite">
+      <div class="mast"><div class="name">The Daily Republic</div>
+        <div class="line"><span>${esc(PAPER_LINE[S.id])}</span><span>Extra!</span></div></div>
+      <div class="stamp s-${p.verdict}">${STAMP[sc.kind][p.verdict]}</div>
+      <h3 class="headline">${esc(p.head)}</h3>
+      <div class="body">${paras.map(t=>`<p>${esc(t)}</p>`).join('')}</div>
+      <div class="dl"><span>Constitutional Standing <b>${p.dcs>0?'+':''}${p.dcs}</b> · Public Support <b>${p.dps>0?'+':''}${p.dps}</b></span>
+        <button class="link" data-act="pocket">Read the clauses</button></div>
+    </article>
+    <div class="next"><button class="btn primary" data-act="cont" autofocus>${p.next==='end'?'See tomorrow’s front page →':'Continue →'}</button></div>` : ''}
+    <div class="tools noprint">
+      <button class="btn scrollbtn" data-act="pocket">${SCROLL_ICON} Pocket Constitution</button>
+      <span class="small sans muted">Tip: press 1–4 to choose</span>
+    </div>
+  </div>`;
+  renderLayer();
+}
+function renderLayer(){
+  if(!UI.pocket || !S || !S.scene){ $layer.innerHTML=''; return; }
+  const sc = CRISIS[S.id].scenes[S.scene];
+  $layer.innerHTML = `<div class="ov" data-act="closebg"><div class="scroll" role="dialog" aria-modal="true" aria-label="Pocket Constitution">
+    <button class="btn x" data-act="close">Close</button>
+    <div class="eyebrow" style="text-align:center;color:#7a5b16">Pocket Constitution</div>
+    <h2>The Constitution of the United States</h2>
+    <div class="sub">The original text that applies to this decision, with its original spelling</div>
+    ${sc.pocket.map(k=>`<div class="clause"><div class="c">${esc(CL[k][0])}</div><blockquote>${esc(CL[k][1])}</blockquote></div>`).join('')}
+  </div></div>`;
+}
+function renderEnd(){
+  const c = CRISIS[S.id], e = S.end, [title, desc] = c.endings[e.key];
+  const got = PROG.endings[c.id]||[];
+  $app.innerHTML = `
+  <article class="front">
+    <div class="mast"><div class="name">The Daily Republic</div>
+      <div class="line"><span>${esc(today())}</span><span>Final Edition</span><span>Five Cents</span></div></div>
+    <div class="eyebrow" style="text-align:center;margin-top:14px">${esc(c.title)} · Ending ${ENDING_ORDER.indexOf(e.key)+1} of 4</div>
+    <h1 class="bighead">${esc(title)}</h1>
+    <p class="deck">${esc(desc)}</p>
+    <figure class="photo fb-${e.key}" style="margin:0"><div class="img">${img(IMG('ending-'+e.key), title, IMG(c.id))}</div>
+      <figcaption class="capt">${PROG.name?esc(PROG.name)+', '+esc(c.role)+',':'The '+esc(c.role)} at the end of a turbulent term.</figcaption></figure>
+    <div class="cols">
+      <section>
+        <div class="colhead">How we got here</div>
+        ${S.history.map(h=>`<div class="rec"><div><div class="ti">${esc(h.title)}</div>${esc(h.head)}</div><span class="mini s-${h.verdict}">${STAMP[h.kind][h.verdict]}</span></div>`).join('')}
+      </section>
+      <aside>
+        <div class="colhead">The final tally</div>
+        <div class="standing">${gauges(false)}</div>
+        <div class="coupon">
+          <div class="eyebrow" style="color:#7a5b16">Report card</div>
+          <div style="font-weight:700;margin-top:4px">${esc(PROG.name||'(no name entered)')}</div>
+          <div class="small">${esc(c.title)}: ${esc(c.role)}</div>
+          <div class="small">Ending: <b>${esc(title)}</b></div>
+          <div class="small">Accuracy: <b>${e.good}/${e.n}</b> (${e.pct}%) · ${e.mins} min</div>
+          <div class="small">${e.when.toLocaleDateString()} ${e.when.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}</div>
+          <div class="row" style="justify-content:space-between;margin-top:6px"><span class="small muted">Check code</span><span class="code">${reportCode()}</span></div>
+        </div>
+      </aside>
+    </div>
+  </article>
+  <div class="paper pad noprint" style="margin-top:18px">
+    <h3>Endings discovered: ${got.length} of 4</h3>
+    <div class="gallery">${ENDING_ORDER.map(k=>got.includes(k)
+      ?`<div class="gal on"><span class="medal"></span>${esc(c.endings[k][0])}</div>`
+      :`<div class="gal"><span style="font:900 22px var(--display)">?</span>Not found yet</div>`).join('')}</div>
+    <p class="small muted" style="margin-top:10px">Endings depend on both Constitutional Standing and Public Support. The facts change every play.</p>
+    <div class="row" style="margin-top:12px">
+      <button class="btn primary" data-act="start" data-id="${c.id}">Play again (new facts)</button>
+      <button class="btn" data-act="menu">Choose another crisis</button>
+      <button class="btn ghost" data-act="print">Print front page</button>
+    </div>
+  </div>`;
+  $layer.innerHTML='';
+}
+
+// ---------- EVENTS ----------
+document.addEventListener('click', e=>{
+  const el = e.target.closest('[data-act]'); if(!el) return;
+  const a = el.dataset.act;
+  if(a==='closebg' && e.target!==el) return;
+  switch(a){
+    case 'start': { const nm=document.getElementById('nm'); if(nm){ PROG.name=nm.value.trim(); save(PROG);} startCrisis(el.dataset.id); break; }
+    case 'choose': choose(+el.dataset.i); break;
+    case 'cont': cont(); break;
+    case 'pocket': UI.pocket=true; renderLayer(); break;
+    case 'close': case 'closebg': UI.pocket=false; renderLayer(); break;
+    case 'quit': if(confirm('Quit this crisis? Your progress in it will be lost.')){ S=null; render(); } break;
+    case 'menu': S=null; render(); window.scrollTo(0,0); break;
+    case 'print': window.print(); break;
+  }
+});
+document.addEventListener('input', e=>{ if(e.target.id==='nm'){ PROG.name=e.target.value.trim(); save(PROG);} });
+document.addEventListener('keydown', e=>{
+  if(UI.pocket && e.key==='Escape'){ UI.pocket=false; renderLayer(); return; }
+  if(!S || !S.scene || UI.pocket) return;
+  if(S.picked===null && /^[1-4]$/.test(e.key) && document.activeElement.tagName!=='INPUT'){
+    const k = +e.key-1; if(S.order[k]!==undefined) choose(S.order[k]);
+  }
+});
+window.__cc = {CRISES, CRISIS, HEAD, startCrisis, choose, cont, get S(){return S;}, endingKey};
+render();
+</script>
+</body>
+</html>
